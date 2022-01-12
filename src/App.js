@@ -3,6 +3,9 @@ import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
 import { nanoid } from 'nanoid';
+
+import { AppContainer } from './App.styled';
+
 class App extends Component {
   state = {
     contacts: [
@@ -25,10 +28,13 @@ class App extends Component {
       name: name,
       number: number,
     };
+    if (this.state.contacts.find(contact => contact.name.toLocaleLowerCase() === newContact.name.toLocaleLowerCase()) !== undefined) {
+       alert(`${newContact.name} is already in contacts`);
+    } else 
 
-    this.setState(prevState => ({
+    {this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts],
-    }));
+    }))}
   };
 
   changeFilter = (event) => {
@@ -39,8 +45,9 @@ class App extends Component {
     const { filter } = this.state;
     const normalizedFilter = this.state.filter.toLocaleLowerCase();
   const filteredContacts = this.state.contacts.filter(contact => contact.name.toLocaleLowerCase().includes(normalizedFilter));
+   
     return (
-      <div>
+      <AppContainer>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
 
@@ -48,7 +55,7 @@ class App extends Component {
         <Filter value={filter} onChange={ this.changeFilter} /> 
         
         <ContactList contacts={filteredContacts} onDelete={this.deleteContact} />
-      </div>
+      </AppContainer>
     );
   }
 }
