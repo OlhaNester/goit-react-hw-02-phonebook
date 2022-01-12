@@ -16,6 +16,7 @@ export class CotactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.onSubmit(this.state);
+    
     this.setState({
       name: '',
       number: '',
