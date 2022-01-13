@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-import { Form, Label, Input } from './ContactForm.styled';
+
+import { Form, Label, Input, Button } from './ContactForm.styled';
 
 export class CotactForm extends Component {
   state = {
@@ -54,11 +55,12 @@ export class CotactForm extends Component {
               required
             />
           </Label>
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     );
   }
 }
+
 
 export default CotactForm;

@@ -1,15 +1,21 @@
+import { FilteredList, CardContact, ButtonDelete } from './ContactList.styled';
+import PropTypes from 'prop-types';
+
 const ContactList = ({ contacts, onDelete }) => {
   return (
-    <ul>
+    <FilteredList>
       {contacts.map(({ id, name, number }) => (
-        <li key={id}>
+        <CardContact key={id}>
           <p>{name}</p>
           <p>{number}</p>
-          <button onClick={() => onDelete(id)}>Delete</button>
-        </li>
+          <ButtonDelete onClick={() => onDelete(id)}>Delete</ButtonDelete>
+        </CardContact>
       ))}
-    </ul>
+    </FilteredList>
   );
 };
-
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  onDelete: PropTypes.func,
+}
 export default ContactList;
