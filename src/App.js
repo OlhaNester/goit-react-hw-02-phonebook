@@ -28,7 +28,7 @@ class App extends Component {
       name: name,
       number: number,
     };
-    if (this.state.contacts.find(contact => contact.name.toLocaleLowerCase() === newContact.name.toLocaleLowerCase()) !== undefined) {
+    if (this.state.contacts.find(contact => contact.name.toLocaleLowerCase() === newContact.name.toLocaleLowerCase()) ) {
        alert(`${newContact.name} is already in contacts`);
     } else 
 
@@ -40,12 +40,16 @@ class App extends Component {
   changeFilter = (event) => {
     this.setState({ filter: event.currentTarget.value });
   }
+
+  getFilteredContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLocaleLowerCase();
+    return contacts.filter(contact => contact.name.toLocaleLowerCase().includes(normalizedFilter));
+  };
   
   render() {
     const { filter } = this.state;
-    const normalizedFilter = this.state.filter.toLocaleLowerCase();
-  const filteredContacts = this.state.contacts.filter(contact => contact.name.toLocaleLowerCase().includes(normalizedFilter));
-   
+    const filteredContacts = this.getFilteredContacts();
     return (
       <AppContainer>
         <h1>Phonebook</h1>
